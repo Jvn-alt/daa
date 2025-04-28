@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My 8 Programs</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #f0f2f5;
+      padding: 20px;
+    }
+    .program {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 30px;
+      white-space: pre-wrap; /* preserve spacing and new lines */
+      overflow-x: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<h1>DAA Programs</h1>
+
+<h2>1. Linear Search</h2>
+<div class="program">
+<pre>
+import time
+import matplotlib.pyplot as plt
+
+def linear_search(arr, n, key):
+    for i in range(n):
+        if arr[i] == key:
+            return i
+    return -1
+
+def linear_key(r):
+    results = []
+    for _ in range(r):
+        while True:
+            try:
+                n = int(input('Enter the number of elements: '))  # Get input for 'n'
+                break  # Exit loop if input is valid
+            except ValueError:
+                print("Invalid input. Please enter a single integer for the number of elements.")
+
+        arr = list(map(int, input('Enter the elements of the array separated by spaces: ').split()))  # Get array elements
+        key = int(input('Enter the key element to be searched: '))  # Get key element
+
+        repeat = 10000
+        result = -1
+        start = time.time()
+        for _ in range(repeat):
+            result = linear_search(arr, n, key)
+        end = time.time()
+
+        if result != -1:
+            print(f'Key {key} found at position {result}')
+        else:
+            print(f'Key {key} not found ')
+
+        time_taken = (end - start) * 1000
+        print(f'Time taken to search a key element = {time_taken} milli secound')
+        results.append((n, time_taken))
+    return results
+
+def plot_results(results):
+    n_values = [result[0] for result in results]
+    times = [result[1] for result in results]
+    plt.figure()
+    plt.plot(n_values, times, 'gD--')
+    plt.xlabel('no of elements(n)')
+    plt.ylabel('time_taken(milli secound)')
+    plt.title('linear search time complexity')
+    plt.grid(True)
+    plt.show()
+
+print('Program name:  linear search algorithm')
+r = int(input('enter the no of inputs: '))
+results = linear_key(r)
+plot_results(results)
+</pre>
+</div>
+
+<h2>2. Tower of Hanoi</h2>
+<div class="program">
+<pre>
+def Towerofhanoi(n, sor, des, aux):
+    if n == 1:
+        print('move disk 1 from source', sor, "to destination", des)
+        return
+    Towerofhanoi(n-1, sor, aux, des)
+    print('move disk', n, 'from source', sor, 'to destination', des)
+    Towerofhanoi(n-1, aux, des, sor)
+
+n = int(input('enter no of disk:'))
+Towerofhanoi(n, 'a', 'b', 'c')
+</pre>
+</div>
+
+<h2>3. Binary Search</h2>
+<div class="program">
+<pre>
+
+import time
+import matplotlib.pyplot as plt
+
+def binary_search(arr, low, high, key):
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == key:
+            return mid
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+def main():
+    print("Program name: Binary Search algorithm")
+    n_values = []
+    times = []
+    r = int(input("Enter the number of runs: "))
+    
+    for _ in range(r):
+        n = int(input("Enter the number of elements: "))
+        arr = sorted(list(map(int, input("Enter the elements of an array: ").split())))
+        key = int(input("Enter the key element to be searched: "))
+        
+        repeat = 10000
+        start = time.time()
+        
+        for _ in range(repeat):
+            result = binary_search(arr, 0, n - 1, key)
+        
+        end = time.time()
+        
+        if result != -1:
+            print(f"Key {key} found at position {result}")
+        else:
+            print(f"Key {key} not found")
+        
+        time_taken = (end - start) * 10000
+        print(f"Time taken to search a key element = {time_taken} milliseconds\n")
+        
+        n_values.append(n)
+        times.append(time_taken)
+    
+    plt.figure()
+    plt.plot(n_values, times, 'o-')
+    plt.xlabel('Number of elements (n)')
+    plt.ylabel('Time taken (milliseconds)')
+    plt.title('Binary Search Time Complexity')
+    plt.grid(True)
+    plt.show()
+
+if _name_ == "_main_":
+    main()
+</pre>
+</div>
+
+<h2>4. Brute Force</h2>
+<div class="program">
+<pre>
+
+def power_bruteforce(a, n):
+    result = 1
+    for i in range(n):
+        result *= a
+    return result
+
+def power_divide_conquer(a, n):
+    if n == 0:
+        return 1
+    elif n % 2 == 0:
+        return power_divide_conquer(a * a, n // 2)
+    else:
+        return a * power_divide_conquer(a * a, n // 2)
+
+a, n = map(int, input("Enter the value of a and n: ").split())
+
+result_brut = power_bruteforce(a, n)
+result_divide_conquer = power_divide_conquer(a, n)
+
+print("Result using brute force:", result_brut)
+print("Result using divide and conquer:", result_divide_conquer)
+</pre>
+</div>
+<h2>5. Selection Sort</h2>
+<div class="program">
+<pre>
+
+import timeit
+import random
+import matplotlib.pyplot as plt
+
+def Input(Array, n):
+    for i in range(0, n):  # Fixed typo
+        ele = random.randrange(0, 50)  # Use a fixed range for better randomness
+        Array.append(ele)
+
+def Selectionsort(Array, size):
+    for ind in range(size):
+        min_index = ind
+        for j in range(ind + 1, size):
+            if Array[j] < Array[min_index]:
+                min_index = j
+        # Swap elements to sort
+        Array[ind], Array[min_index] = Array[min_index], Array[ind]
+
+n_values = []  # Store different values of n (array sizes)
+CPU_times = []  # Store CPU times
+
+trials = int(input("Enter number of trials: "))  # Fixed typo here from "trail" to "trials"
+
+for t in range(trials):
+    Array = []
+    print(f"-------->TRIAL NUMBER: {t + 1}")
+    n = int(input("Enter number of elements: "))
+    Input(Array, n)
+
+    start_time = timeit.default_timer()  # Record start time
+    Selectionsort(Array, n)
+    end_time = timeit.default_timer()  # Record end time
+
+    elapsed_time = end_time - start_time  # Calculate elapsed time
+    print("Sorted array:")
+    print(Array)
+
+    n_values.append(n)  # Append n to the list
+    CPU_times.append(round(elapsed_time * 1000000, 2))  # Convert to microseconds
+
+# Print results
+print("N CPU Time (in microseconds):")
+for i in range(trials):
+    print(f"{n_values[i]} {CPU_times[i]}")
+
+# Plotting the graph
+plt.plot(n_values, CPU_times)
+plt.scatter(n_values, CPU_times, color="red", marker="*", s=100)
+plt.xlabel("Array Size (N)")
+plt.ylabel("CPU Processing Time (Microseconds)")
+plt.title("Selection Sort CPU Time vs Array Size")
+plt.show()
+</pre>
+</div>
+<h2>6. Quick Sort</h2>
+<div class="program">
+<pre>
+
+import time
+import random
+import matplotlib.pyplot as plt
+
+def Input(Array, n):
+    for i in range(0, n):
+        ele = random.randrange(1, 50)
+        Array.append(ele)
+
+def partition(Array, low, high):
+    i = (low - 1)
+    pivot = Array[high]
+
+    for j in range(low, high):
+        if Array[j] <= pivot:
+            i = i + 1
+            Array[i], Array[j] = Array[j], Array[i]
+
+    Array[i + 1], Array[high] = Array[high], Array[i + 1]
+    return (i + 1)
+
+def QuickSort(Array, low, high):
+    if low < high:
+        pi = partition(Array, low, high)
+        QuickSort(Array, low, pi - 1)
+        QuickSort(Array, pi + 1, high)
+
+N = []
+CPU = []
+trail = int(input("Enter no of trials: "))
+
+for t in range(0, trail):
+    Array = []
+    print("\n--- Trial No:", t + 1, "---")
+    n = int(input("Enter no of elements: "))
+    Input(Array, n)
+
+    start = time.process_time()
+    QuickSort(Array, 0, n - 1)
+    times = time.process_time() - start
+
+    print("Sorted Array:")
+    print(Array)
+    N.append(n)
+    CPU.append(round(float(times) * 1000000, 2))
+
+print("\nN | CPU")
+for t in range(0, trail):
+    print(N[t], "|", CPU[t])
+
+plt.plot(N,CPU)
+
+plt.scatter(N, CPU, color="red", marker="x", s=50)
+plt.xlabel("Array size = N")
+plt.ylabel("CPU Processing time")
+plt.title("Quick Sort time efficiency")
+plt.show()
+</pre>
+</div>
+
+<h2>7.Binomial Coeff</h2>
+<div class="program">
+<pre>
+def factorial(n):
+    fact = 1
+    for i in range(1, n + 1):
+        fact = fact * i
+    return fact
+
+def binomialCoeff_brutoforce(n, k):
+    return factorial(n) // (factorial(k) * factorial(n - k))
+
+def binomialCoeff_DP(n, k):
+    c = [[0 for j in range(k + 1)] for i in range(n + 1)]
+    for i in range(n + 1):
+        for j in range(min(i, k) + 1):
+            if j == 0 or j == i:
+                c[i][j] = 1
+            else:
+                c[i][j] = c[i - 1][j - 1] + c[i - 1][j]
+    return c[n][k]
+
+n = int(input("Enter the value of n: "))
+k = int(input("Enter the value of k: "))
+result_bruteForce = binomialCoeff_brutoforce(n, k)
+result_DP = binomialCoeff_DP(n, k)
+print(f"Binomial Coefficient (Brute Force): {result_bruteForce}")
+print(f"Binomial Coefficient (Dynamic Programming): {result_DP}")
+</pre>
+</div>
+
+<h2>8.BFS</h2>
+<div class="program">
+<pre>
+Max = 100
+c = [[0] * Max for _ in range(Max)]
+visited = [0] * Max
+queue = [0] * Max
+
+def BFS(v):
+    front = 0
+    rear = -1
+
+    visited[v] = 1
+    queue[rear + 1] = v
+    rear += 1
+
+    while front <= rear:
+        v = queue[front]
+        front += 1
+
+        print(f"{v}", end=" ")
+
+        for i in range(1, n + 1):
+            if c[v][i] == 1 and visited[i] == 0:
+                queue[rear + 1] = i
+                rear += 1
+                visited[i] = 1
+
+if __name__ == "__main__":
+    print("Enter the no. of vertices in the graph:")
+    n = int(input())
+
+    print("Enter the cost matrix of the graph:")
+    for i in range(1, n + 1):
+        c[i] = [0] + list(map(int, input().split()))
+
+    for i in range(1, n + 1):
+        visited[i] = 0
+
+    print("Enter the starting vertex:")
+    v = int(input())
+
+    print("BFS traversal of the graph is:", end=" ")
+    BFS(v)
+</pre>
+</div>
+
+</body>
+</html>
