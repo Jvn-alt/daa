@@ -45,6 +45,7 @@
       border-color: #555;
     }
   </style>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -610,7 +611,35 @@ patternsearch(text, pat)
     document.body.classList.toggle('dark');
   }
 </script>
-          
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+
+<script>
+  document.querySelectorAll('pre').forEach((pre) => {
+    const btn = document.createElement('button');
+    btn.innerText = 'Copy';
+    btn.style.position = 'absolute';
+    btn.style.right = '10px';
+    btn.style.top = '10px';
+    btn.style.padding = '5px 10px';
+    btn.style.border = 'none';
+    btn.style.background = '#4caf50';
+    btn.style.color = 'white';
+    btn.style.cursor = 'pointer';
+    btn.style.borderRadius = '4px';
+    btn.style.fontSize = '12px';
+
+    pre.style.position = 'relative';
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pre.innerText).then(() => {
+        btn.innerText = 'Copied!';
+        setTimeout(() => (btn.innerText = 'Copy'), 2000);
+      });
+    });
+  });
+</script>
+      
 </body>
 </html>
               
