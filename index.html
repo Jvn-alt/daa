@@ -92,86 +92,16 @@ plot_results(results)
 <h2>2. IT Lab 10</h2>
 <div class="program">
 <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Registration Form&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
+def TowerOfHanoi(n, source, destination, auxiliary):
+    if n == 1:
+        print("Move disk 1 from source", source, "to destination", destination)
+        return
+    TowerOfHanoi(n - 1, source, auxiliary, destination)
+    print("Move disk", n, "from source", source, "to destination", destination)
+    TowerOfHanoi(n - 1, auxiliary, destination, source)
 
-&lt;h1&gt;Registration Form&lt;/h1&gt;
-
-&lt;form onsubmit=&quot;return validateForm()&quot;&gt;
-  &lt;label for=&quot;name&quot;&gt;Name:&lt;/label&gt;
-  &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; required&gt;&lt;br&gt;&lt;br&gt;
-
-  &lt;label for=&quot;email&quot;&gt;Email:&lt;/label&gt;
-  &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; required&gt;&lt;br&gt;&lt;br&gt;
-
-  &lt;label for=&quot;password&quot;&gt;Password:&lt;/label&gt;
-  &lt;input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; minlength=&quot;8&quot; required&gt;&lt;br&gt;&lt;br&gt;
-
-  &lt;label for=&quot;confirm-password&quot;&gt;Confirm Password:&lt;/label&gt;
-  &lt;input type=&quot;password&quot; id=&quot;confirm-password&quot; name=&quot;confirm-password&quot; minlength=&quot;8&quot; required&gt;&lt;br&gt;&lt;br&gt;
-
-  &lt;label for=&quot;phone&quot;&gt;Phone Number:&lt;/label&gt;
-  &lt;input type=&quot;tel&quot; id=&quot;phone&quot; name=&quot;phone&quot; pattern=&quot;[0-9]{10}&quot; required&gt;&lt;br&gt;&lt;br&gt;
-
-  &lt;input type=&quot;submit&quot; value=&quot;Register&quot;&gt;
-&lt;/form&gt;
-
-&lt;script&gt;
-function validateForm() {
-  let name = document.getElementById(&quot;name&quot;).value;
-  let email = document.getElementById(&quot;email&quot;).value;
-  let password = document.getElementById(&quot;password&quot;).value;
-  let confirmPassword = document.getElementById(&quot;confirm-password&quot;).value;
-  let phone = document.getElementById(&quot;phone&quot;).value;
-
-  if (name === &quot;&quot;) {
-    alert(&quot;Please enter your name.&quot;);
-    return false;
-  }
-
-  let emailRegex = /^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}$/;
-  if (!emailRegex.test(email)) {
-    alert(&quot;Please enter a valid email address.&quot;);
-    return false;
-  }
-
-  if (password === &quot;&quot;) {
-    alert(&quot;Please enter your password.&quot;);
-    return false;
-  }
-
-  if (password.length &lt; 8) {
-    alert(&quot;Your password must be at least 8 characters long.&quot;);
-    return false;
-  }
-
-  if (confirmPassword === &quot;&quot;) {
-    alert(&quot;Please confirm your password.&quot;);
-    return false;
-  }
-
-  if (password !== confirmPassword) {
-    alert(&quot;Passwords do not match.&quot;);
-    return false;
-  }
-
-  let phoneRegex = /^[0-9]{10}$/;
-  if (!phoneRegex.test(phone)) {
-    alert(&quot;Please enter a valid 10-digit phone number.&quot;);
-    return false;
-  }
-
-  alert(&quot;Registration successful!&quot;);
-  return true;
-}
-&lt;/script&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
+n = int(input("Enter the number of disks: "))
+TowerOfHanoi(n, 'A', 'B', 'C')
 </pre>
 </div>
 
