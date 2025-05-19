@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>DAA</title>
+  <title>DAA Programs</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
   <style>
     body {
       font-family: monospace;
@@ -14,84 +15,84 @@
       border: 1px solid #ccc;
       padding: 15px;
       margin-bottom: 30px;
-      white-space: pre-wrap; /* preserve spacing and new lines */
       overflow-x: auto;
     }
     h1 {
       text-align: center;
     }
-    h2 {
-      color: #333;
+    summary {
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    body.dark {
+      background: #1e1e1e;
+      color: white;
+    }
+    body.dark .program {
+      background: #2d2d2d;
+      border-color: #555;
     }
   </style>
 </head>
 <body>
 
+<button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
 <h1>DAA Programs</h1>
 
-<h2>1. Linear Search</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>1. Linear Search</summary>
+  <div class="program">
+    <pre><code class="language-python">
 import time
 import matplotlib.pyplot as plt
 
+# Linear search implementation
 def linear_search(arr, n, key):
     for i in range(n):
         if arr[i] == key:
             return i
     return -1
 
+# Run and time the search
 def linear_key(r):
     results = []
     for _ in range(r):
-        while True:
-            try:
-                n = int(input('Enter the number of elements: '))  # Get input for 'n'
-                break  # Exit loop if input is valid
-            except ValueError:
-                print("Invalid input. Please enter a single integer for the number of elements.")
-
-        arr = list(map(int, input('Enter the elements of the array separated by spaces: ').split()))  # Get array elements
-        key = int(input('Enter the key element to be searched: '))  # Get key element
-
-        repeat = 10000
-        result = -1
+        n = int(input('Enter number of elements: '))
+        arr = list(map(int, input('Enter array: ').split()))
+        key = int(input('Enter key: '))
         start = time.time()
-        for _ in range(repeat):
-            result = linear_search(arr, n, key)
+        for _ in range(10000):
+            linear_search(arr, n, key)
         end = time.time()
-
-        if result != -1:
-            print(f'Key {key} found at position {result}')
-        else:
-            print(f'Key {key} not found ')
-
-        time_taken = (end - start) * 1000
-        print(f'Time taken to search a key element = {time_taken} milli secound')
-        results.append((n, time_taken))
+        print('Time taken:', (end - start) * 1000, 'ms')
+        results.append((n, (end - start) * 1000))
     return results
 
+# Plotting results
 def plot_results(results):
-    n_values = [result[0] for result in results]
-    times = [result[1] for result in results]
-    plt.figure()
-    plt.plot(n_values, times, 'gD--')
-    plt.xlabel('no of elements(n)')
-    plt.ylabel('time_taken(milli secound)')
-    plt.title('linear search time complexity')
+    n_vals, times = zip(*results)
+    plt.plot(n_vals, times, 'gD--')
+    plt.xlabel('Elements')
+    plt.ylabel('Time (ms)')
+    plt.title('Linear Search Complexity')
     plt.grid(True)
     plt.show()
+    </code></pre>
+  </div>
+</details>
 
-print('Program name:  linear search algorithm')
-r = int(input('enter the no of inputs: '))
-results = linear_key(r)
-plot_results(results)
-</pre>
-</div>
-
-<h2>2. Tower Of Hannoi</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>2. Tower Of Hannoi</summary>
+  <div class="program">
+    <pre><code class="language-python">
 def TowerOfHanoi(n, source, destination, auxiliary):
     if n == 1:
         print("Move disk 1 from source", source, "to destination", destination)
@@ -102,13 +103,14 @@ def TowerOfHanoi(n, source, destination, auxiliary):
 
 n = int(input("Enter the number of disks: "))
 TowerOfHanoi(n, 'A', 'B', 'C')
-</pre>
-</div>
+</code></pre>
+  </div>
+</details>
 
-<h2>3. Binary Search</h2>
-<div class="program">
-<pre>
-
+<details open>
+  <summary>3. Binary Search</summary>
+  <div class="program">
+    <pre><code class="language-python">
 import time
 import matplotlib.pyplot as plt
 
@@ -163,13 +165,14 @@ def main():
 
 if _name_ == "_main_":
     main()
-</pre>
-</div>
+</code></pre>
+  </div>
+</details>
 
-<h2>4. Brute Force</h2>
-<div class="program">
-<pre>
-
+<details open>
+  <summary>4. Brute Force</summary>
+  <div class="program">
+    <pre><code class="language-python">
 def power_bruteforce(a, n):
     result = 1
     for i in range(n):
@@ -191,11 +194,14 @@ result_divide_conquer = power_divide_conquer(a, n)
 
 print("Result using brute force:", result_brut)
 print("Result using divide and conquer:", result_divide_conquer)
-</pre>
-</div>
-<h2>5. Selection Sort</h2>
-<div class="program">
-<pre>
+</code></pre>
+  </div>
+</details>
+  
+<details open>
+  <summary>5. Selection Sort</summary>
+  <div class="program">
+    <pre><code class="language-python">
 
 import timeit
 import random
@@ -249,11 +255,14 @@ plt.xlabel("Array Size (N)")
 plt.ylabel("CPU Processing Time (Microseconds)")
 plt.title("Selection Sort CPU Time vs Array Size")
 plt.show()
-</pre>
-</div>
-<h2>6. Quick Sort</h2>
-<div class="program">
-<pre>
+</code></pre>
+  </div>
+</details>
+  
+<details open>
+  <summary>6. Quick Sort</summary>
+  <div class="program">
+    <pre><code class="language-python">
 
 import time
 import random
@@ -312,12 +321,14 @@ plt.xlabel("Array size = N")
 plt.ylabel("CPU Processing time")
 plt.title("Quick Sort time efficiency")
 plt.show()
-</pre>
-</div>
+</code></pre>
+  </div>
+</details>
 
-<h2>7.Binomial Coeff</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>7. Binomial Coeff</summary>
+  <div class="program">
+    <pre><code class="language-python">
 def factorial(n):
     fact = 1
     for i in range(1, n + 1):
@@ -343,12 +354,14 @@ result_bruteForce = binomialCoeff_brutoforce(n, k)
 result_DP = binomialCoeff_DP(n, k)
 print(f"Binomial Coefficient (Brute Force): {result_bruteForce}")
 print(f"Binomial Coefficient (Dynamic Programming): {result_DP}")
-</pre>
-</div>
+</code></pre>
+  </div>
+</details>
 
-<h2>8.BFS</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>8. BFS</summary>
+  <div class="program">
+    <pre><code class="language-python">
 Max = 100
 c = [[0] * Max for _ in range(Max)]
 visited = [0] * Max
@@ -390,12 +403,14 @@ if __name__ == "__main__":
 
     print("BFS traversal of the graph is:", end=" ")
     BFS(v)
-</pre>
-</div>
+</code></pre>
+  </div>
+</details>
 
-<h2>9. Polynomial(BruteForce)</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>9. Polynomial (Brute Force) </summary>
+  <div class="program">
+    <pre><code class="language-python">
 import time
 import math
 
@@ -431,13 +446,14 @@ horners_rule_result = hornersRule(coeff, n, x)
 end = time.time()
 time_used = end - start
 print(f"Horner's rule result: {horners_rule_result}; Time used: {time_used} seconds")
+</code></pre>
+  </div>
+</details>
 
-</pre>
-</div>
-
-<h2>10. Minimum Spanning Tree (Prince Algorithm)</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>10. Minimum Spanning Tree (Prince Algorithm) </summary>
+  <div class="program">
+    <pre><code class="language-python">
 import sys
 
 def minKey(key, mstSet, n):
@@ -486,12 +502,14 @@ for i in range(n):
 
 primMST(c, n)
 
-</pre>
-</div>
+</code></pre>
+  </div>
+</details>
 
-<h2>11. String Matching (Boyer-moore) </h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>11. String Matching (Boyer-moore) </summary>
+  <div class="program">
+    <pre><code class="language-python">
 
 def computeLPSArray(pat, M, lps):
     length = 0  # length of the previous longest prefix suffix
@@ -538,9 +556,10 @@ KMPSearch(pat, txt)
 </pre>
 </div>
 
-<h2>12. String Matching (KMP Algorithm)</h2>
-<div class="program">
-<pre>
+<details open>
+  <summary>12. String Matching (KMP Algorithm) </summary>
+  <div class="program">
+    <pre><code class="language-python">
 MAX_CHARS = 256
 
 def max(a, b):
@@ -577,9 +596,17 @@ text = input("Enter the text: ").rstrip('\n')
 pat = input("Enter the pattern: ").rstrip('\n')
 
 patternsearch(text, pat)
-</pre>
-</div>
-
+</code></pre>
+  </div>
+</details>
+          
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+  }
+</script>
+          
 </body>
 </html>
               
