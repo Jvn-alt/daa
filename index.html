@@ -149,7 +149,7 @@ def main():
         else:
             print(f"Key {key} not found")
         
-        time_taken = (end - start) * 10000
+        time_taken = (end - start) * 1000
         print(f"Time taken to search a key element = {time_taken} milliseconds\n")
         
         n_values.append(n)
@@ -162,8 +162,8 @@ def main():
     plt.title('Binary Search Time Complexity')
     plt.grid(True)
     plt.show()
-
-if _name_ == "_main_":
+          
+if __name__ == "__main__":
     main()
 </code></pre>
   </div>
