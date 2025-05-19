@@ -463,5 +463,193 @@ if __name__ == "__main__":
 </pre>
 </div>
 
+<h2>9</h2>
+<div class="program">
+<pre>
+import time
+import math
+
+def bruteForce(coeff, n, x):
+    sum = 0.0
+    for i in range(0, n + 1):
+        sum = sum + coeff[i] * math.pow(x, i)
+    return sum
+
+def hornersRule(coeff, n, x):
+    result = coeff[n]
+    for i in range(n - 1, -1, -1):
+        result = result * x + coeff[i]
+    return result
+
+n = int(input("Enter the degree of the polynomial: "))
+
+coeff = [0] * (n + 1)
+print("Enter the coefficients from highest to lowest degree:")
+for i in range(n, -1, -1):
+    coeff[i] = int(input())
+
+x = float(input("Enter the value of x: "))
+
+start = time.time()
+brute_force_result = bruteForce(coeff, n, x)
+end = time.time()
+time_used = end - start
+print(f"Brute force result: {brute_force_result}; Time used: {time_used} seconds")
+
+start = time.time()
+horners_rule_result = hornersRule(coeff, n, x)
+end = time.time()
+time_used = end - start
+print(f"Horner's rule result: {horners_rule_result}; Time used: {time_used} seconds")
+
+</pre>
+</div>
+
+<h2>10</h2>
+<div class="program">
+<pre>
+import sys
+
+def minKey(key, mstSet, n):
+    min_value = sys.maxsize
+    for v in range(n):
+        if mstSet[v] == False and key[v] < min_value:
+            min_value = key[v]
+            min_index = v
+    return min_index
+
+def printMST(parent, c, n):
+    total_weight = 0
+    print("Edge \tWeight")
+    for i in range(1, n):
+        print(str(parent[i]) + " - " + str(i) + " \t" + str(c[i][parent[i]]))
+        total_weight += c[i][parent[i]]
+    return total_weight
+
+def primMST(c, n):
+    parent = [None] * n
+    key = [sys.maxsize] * n
+    mstSet = [False] * n
+
+    key[0] = 0
+    parent[0] = -1
+
+    for count in range(n):
+        u = minKey(key, mstSet, n)
+        mstSet[u] = True
+
+        for v in range(n):
+            if c[u][v] > 0 and mstSet[v] == False and c[u][v] < key[v]:
+                key[v] = c[u][v]
+                parent[v] = u
+
+    total_weight = printMST(parent, c, n)
+    print("Total cost of the minimum spanning tree: " + str(total_weight))
+
+# Driver code
+n = int(input("Enter no. of vertices: "))
+c = []
+
+print("Enter the cost adjacency matrix:")
+for i in range(n):
+    c.append(list(map(int, input().split())))
+
+primMST(c, n)
+
+</pre>
+</div>
+
+<h2>11</h2>
+<div class="program">
+<pre>
+
+def computeLPSArray(pat, M, lps):
+    length = 0  # length of the previous longest prefix suffix
+    lps[0] = 0  # lps[0] is always 0
+    i = 1
+
+    while i < M:
+        if pat[i] == pat[length]:
+            length += 1
+            lps[i] = length
+            i += 1
+        else:
+            if length != 0:
+                length = lps[length - 1]
+            else:
+                lps[i] = 0
+                i += 1
+
+def KMPSearch(pat, txt):
+    M = len(pat)
+    N = len(txt)
+    lps = [0] * M
+    computeLPSArray(pat, M, lps)
+
+    i = j = 0  # index for txt[], index for pat[]
+    while i < N:
+        if pat[j] == txt[i]:
+            i += 1
+            j += 1
+
+        if j == M:
+            print(f"Found pattern at index {i - j}")
+            j = lps[j - 1]
+        elif i < N and pat[j] != txt[i]:
+            if j != 0:
+                j = lps[j - 1]
+            else:
+                i += 1
+
+
+txt = input("Enter the text: ")
+pat = input("Enter the pattern: ")
+KMPSearch(pat, txt)
+</pre>
+</div>
+
+<h2>12</h2>
+<div class="program">
+<pre>
+MAX_CHARS = 256
+
+def max(a, b):
+    return a if a > b else b
+
+def badCharHeuristic(pat, size, badchar):
+    for i in range(MAX_CHARS):
+        badchar[i] = -1
+    for i in range(size):
+        badchar[ord(pat[i])] = i
+
+def patternsearch(text, pat):
+    m = len(pat)
+    n = len(text)
+    badchar = [-1] * MAX_CHARS
+
+    badCharHeuristic(pat, m, badchar)
+
+    s = 0  # s is shift of the pattern with respect to text
+    while s <= (n - m):
+        j = m - 1
+
+        while j >= 0 and pat[j] == text[s + j]:
+            j = j - 1
+
+        if j < 0:
+            print("\nPattern occurs at position = ", s)
+            s += m - badchar[ord(text[s + m])] if (s + m) < n else 1
+        else:
+            s += max(1, j - badchar[ord(text[s + j])])
+
+
+text = input("Enter the text: ").rstrip('\n')
+pat = input("Enter the pattern: ").rstrip('\n')
+
+patternsearch(text, pat)
+</pre>
+</div>
+
 </body>
 </html>
+              
