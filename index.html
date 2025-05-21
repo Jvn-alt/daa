@@ -624,7 +624,7 @@ patternsearch(text, pat)
   <summary>13(a). Topological Ordering</summary>
   <div class="program">
     <pre><code class="language-python">
-      def main():
+def main():
     n = int(input("Enter the number of vertices: "))
     count = 0
     c = [[0 for _ in range(n)] for _ in range(n)]  # Adjacency matrix
@@ -664,7 +664,7 @@ if __name__ == "__main__":
   <summary>13(b). Transitive Closure (Warshal)</summary>
   <div class="program">
     <pre><code class="language-python">
-      def warshall(c, n):
+def warshall(c, n):
     for k in range(n):
         for i in range(n):
             for j in range(n):
