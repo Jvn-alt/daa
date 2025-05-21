@@ -621,7 +621,7 @@ patternsearch(text, pat)
 </details>
 
   <details open>
-  <summary>13(a).  Topological Ordering</summary>
+  <summary>13(a). Topological Ordering</summary>
   <div class="program">
     <pre><code class="language-python">
       def main():
@@ -659,7 +659,38 @@ if __name__ == "__main__":
    </code></pre>
   </div>
 </details>
-   
+  
+<details open>
+  <summary>13(b). Transitive Closure (Warshal)</summary>
+  <div class="program">
+    <pre><code class="language-python">
+      def warshall(c, n):
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if c[i][j] or (c[i][k] and c[k][j]):
+                    c[i][j] = 1
+
+    print("The transitive closure of the graph is:")
+    for i in range(n):
+        for j in range(n):
+            print(c[i][j], end=" ")
+        print()
+
+def main():
+    n = int(input("Enter n: "))
+    c = []
+    print("Enter adjacency cast matrix:")
+    for i in range(n):
+        row = list(map(int, input().split()))
+        c.append(row)
+
+    warshall(c, n)
+main()
+
+  </code></pre>
+  </div>
+</details>    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script>
   function toggleTheme() {
