@@ -619,7 +619,47 @@ patternsearch(text, pat)
 </code></pre>
   </div>
 </details>
-          
+
+  <details open>
+  <summary>13(a).  Topological Ordering</summary>
+  <div class="program">
+    <pre><code class="language-python">
+      def main():
+    n = int(input("Enter the number of vertices: "))
+    count = 0
+    c = [[0 for _ in range(n)] for _ in range(n)]  # Adjacency matrix
+    indeg = [0] * n  # In-degree array
+    flag = [0] * n   # Processed flag
+    i,j,k = 0,0,0
+    
+    print("Enter the cost matrix (row by row):")
+    for i in range(n):
+        row = input().split()
+        for j in range(n):
+            c[i][j] = int(row[j])
+    for i in range (n):
+        for j in range (n):
+            indeg[i] += c[j][i]
+
+    print("Topological Order:")
+    while count < n:
+        for k in range(n):
+            if indeg[k] == 0 and flag[k] == 0:
+                print(f"{k+1:3}", end=" ")
+                flag[k] = 1
+                count += 1
+                for i in range(n):
+                    if c[k][i] == 1:
+                        indeg[i] -= 1
+    return 0
+
+if __name__ == "__main__":
+    main()
+
+   </code></pre>
+  </div>
+</details>
+   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script>
   function toggleTheme() {
