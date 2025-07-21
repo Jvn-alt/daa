@@ -5,112 +5,104 @@
   <title>DAA Programs</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
   <style>
-   /* Global Styles */
+   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
 body {
-  font-family: 'Fira Code', monospace;
-  background: #f5f7fa;
-  color: #111;
+  font-family: 'JetBrains Mono', monospace;
+  background: #fefefe;
+  color: #222;
   padding: 20px;
   margin: 0;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Headings */
 h1 {
   text-align: center;
+  font-weight: 600;
+  font-size: 2rem;
   margin-bottom: 30px;
 }
 
-/* Code Block Wrapper */
 .program {
-  background: #f0f0f0;
-  color: #111;
-  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 15px;
   margin-bottom: 30px;
-  white-space: pre-wrap;
   overflow-x: auto;
-  border-radius: 8px;
 }
 
-/* Summary (dropdown headings) */
 summary {
-  font-size: 1.2em;
-  cursor: pointer;
-  margin-bottom: 10px;
+  font-size: 1.1em;
   font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
-/* Syntax Highlighting */
 code, pre {
-  font-family: 'Fira Code', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
-  background-color: #1e1e1e;
-  color: #f8f8f2;
+  background: #f4f4f4;
+  color: #111;
+  border-radius: 6px;
   padding: 10px;
-  border-radius: 5px;
-  display: block;
   overflow-x: auto;
 }
 
-/* Smooth fonts */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Dark Mode */
+/* Dark mode */
 body.dark {
-  background: #1e1e1e;
-  color: #f5f5f5;
+  background: #121212;
+  color: #e0e0e0;
 }
 body.dark .program {
-  background: #2b2b2b;
-  color: #f8f8f2;
-  border-color: #555;
+  background: #1e1e1e;
+  color: #eee;
+  border-color: #444;
 }
 body.dark code, body.dark pre {
-  background-color: #2d2d2d;
-  color: #f8f8f2;
+  background: #272727;
+  color: #e0e0e0;
 }
 
-/* Toggle Button */
+/* Theme toggle button */
 .theme-toggle {
   position: fixed;
   top: 10px;
   right: 10px;
   padding: 6px 12px;
-  background: #4caf50;
+  font-size: 14px;
+  background: #0077cc;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
   transition: background 0.2s;
 }
 .theme-toggle:hover {
-  background: #388e3c;
+  background: #005fa3;
 }
 
-/* Copy Button inside Code Blocks */
+/* Copy button inside code blocks */
 pre {
   position: relative;
 }
 pre button {
   position: absolute;
-  right: 10px;
   top: 10px;
-  padding: 5px 10px;
-  border: none;
-  background: #4caf50;
+  right: 10px;
+  background: #0077cc;
   color: white;
-  cursor: pointer;
+  border: none;
   border-radius: 4px;
+  padding: 4px 8px;
   font-size: 12px;
+  cursor: pointer;
 }
 pre button:hover {
-  background: #388e3c;
+  background: #005fa3;
 }
+
 
 
   </style>
