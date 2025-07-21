@@ -3,93 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <title>DAA Programs</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-  <style>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet" />
+
+<style>
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background: #f6f8fa;
-    color: #24292e;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    color: #222;
     margin: 0;
-    padding: 2rem;
+    padding: 40px;
     line-height: 1.6;
   }
 
   h1 {
     text-align: center;
     font-weight: 600;
-    margin-bottom: 2rem;
+    font-size: 28px;
+    margin-bottom: 40px;
   }
 
-  .program {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-    padding: 1rem;
-    margin-bottom: 2rem;
-    overflow-x: auto;
+  details {
+    margin-bottom: 30px;
+    border-left: 4px solid #007acc;
+    padding-left: 16px;
   }
 
   summary {
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: 600;
+    margin-bottom: 10px;
     cursor: pointer;
-    margin-bottom: 0.5rem;
+  }
+
+  .program {
+    background: none;
+    padding: 0;
+    margin: 0;
   }
 
   pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: none;
+    padding: 0;
     margin: 0;
   }
 
   code {
-    font-family: Consolas, Monaco, "Courier New", monospace;
-    font-size: 14px;
-    color: #1f2328;
-    background-color: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    color: #333;
+    background: none;
   }
 
   .theme-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    padding: 6px 12px;
-    background-color: #0969da;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
+    display: none;
   }
+pre {
+  background: #f5f5f5; /* light gray background */
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 8px;
+}
 
-  .theme-toggle:hover {
-    background-color: #0550ae;
-  }
+code[class*="language-"] {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+  color: inherit;
+  background: none;
+  display: block;
+  white-space: pre;
+}
 
-  body.dark {
-    background: #0d1117;
-    color: #c9d1d9;
-  }
+</style>
 
-  body.dark .program {
-    background: #161b22;
-    border-color: #30363d;
-  }
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet" />
 
-  body.dark code {
-    color: #c9d1d9;
-  }
-
-  body.dark .theme-toggle {
-    background-color: #238636;
-  }
-
-  body.dark .theme-toggle:hover {
-    background-color: #2ea043;
-  }
-
-
-  </style>
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
+  
 </head>
 <body>
 
@@ -119,21 +109,33 @@ def linear_key(r):
         key = int(input('Enter key: '))
         start = time.time()
         for _ in range(10000):
-            linear_search(arr, n, key)
+            result=linear_search(arr, n, key)
         end = time.time()
-        print('Time taken:', (end - start) * 1000, 'ms')
-        results.append((n, (end - start) * 1000))
+        if result == -1:
+            print("Key Not Found")
+       else:
+            print("Key Found At Position", result)
+        time_taken= (end - start) * 1000
+        print('Time taken:', time_taken, 'ms')
+        results.append((n, time_taken))
     return results
 
 # Plotting results
 def plot_results(results):
-    n_vals, times = zip(*results)
+    n_vals = [result[0] for result in results]
+    times = [result[1] for result in results]
+    plt.figure()
     plt.plot(n_vals, times, 'gD--')
     plt.xlabel('Elements')
     plt.ylabel('Time (ms)')
     plt.title('Linear Search Complexity')
     plt.grid(True)
     plt.show()
+
+print('Program Name: Lineaar Search Algorithm")
+r=int(input("Enter the number of inputs"))
+results = linear_key(r)
+plot_results(results)
     </code></pre>
   </div>
 </details>
@@ -772,15 +774,66 @@ floyd(V, C)
     </code></pre>
   </div>
 </details>  
+
+<details open>
+  <summary>15. Subset of a Set</summary>
+  <div class="program">
+    <pre><code class="language-python">
+def sum_of_subsets(s, k, r):
+    global count, x, w, d, i
+    x[k] = 1
+
+    if s + w[k] == d:
+        print("Subset %d =" % (count + 1), end=" ")
+        for i in range(k + 1):
+            if x[i] == 1:
+                print("%d" % w[i], end=" ")
+        print()
+        count += 1
+
+    elif k + 1 < n and s + w[k] + w[k + 1] <= d:
+        sum_of_subsets(s + w[k], k + 1, r - w[k])
+
+    if k + 1 < n and s + r - w[k] >= d and s + w[k + 1] <= d:
+        x[k] = 0
+        sum_of_subsets(s, k + 1, r - w[k])
+
+if __name__ == "__main__":
+    w = [0] * 10
+    x = [0] * 10
+    count = 0
+    i = 0
+
+    n = int(input("Enter the number of elements: "))
+    print("Enter the elements in ascending order:")
+    for i in range(n):
+        w[i] = int(input())
+
+    d = int(input("Enter the sum: "))
+
+    total_sum = 0
+    for i in range(n):
+        x[i] = 0
+        total_sum += w[i]
+
+    if total_sum < d or w[0] > d:
+        print("No subset possible")
+    else:
+        sum_of_subsets(0, 0, total_sum)
+
+    </code></pre>
+  </div>
+</details>  
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script>
   function toggleTheme() {
     document.body.classList.toggle('dark');
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script>
+
   document.querySelectorAll('pre').forEach((pre) => {
     const btn = document.createElement('button');
     btn.innerText = 'Copy';
