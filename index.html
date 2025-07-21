@@ -5,58 +5,113 @@
   <title>DAA Programs</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
   <style>
-    body {
-      font-family: monospace;
-      background: #f0f2f5;
-      padding: 20px;
-    }
-    .program {
-      background: #1e1e1e;   /* dark background */
-      color: #2d2d2d;        /* light text */
-      border: 1px solid #333;
-      padding: 15px;
-      margin-bottom: 30px;
-      white-space: pre-wrap;
-      overflow-x: auto;
-      font-family: monospace;
-    }
-    * {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+   /* Global Styles */
+body {
+  font-family: 'Fira Code', monospace;
+  background: #f5f7fa;
+  color: #111;
+  padding: 20px;
+  margin: 0;
+  transition: background 0.3s, color 0.3s;
+}
 
+/* Headings */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-    h1 {
-      text-align: center;
-    }
-    summary {
-      font-size: 1.2em;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-    .theme-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    body.dark {
-      background: #1e1e1e;
-      color: white;
-    }
-    body.dark .program {
-      background: #2d2d2d;
-      border-color: #555;
-    }
-    code, pre {
-      font-family: 'Fira Code', monospace;
-      font-size: 14px;
-      color: #f8f8f2;
-      background-color: #1e1e1e;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-    }
+/* Code Block Wrapper */
+.program {
+  background: #f0f0f0;
+  color: #111;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 30px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+/* Summary (dropdown headings) */
+summary {
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Syntax Highlighting */
+code, pre {
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  background-color: #1e1e1e;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 5px;
+  display: block;
+  overflow-x: auto;
+}
+
+/* Smooth fonts */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode */
+body.dark {
+  background: #1e1e1e;
+  color: #f5f5f5;
+}
+body.dark .program {
+  background: #2b2b2b;
+  color: #f8f8f2;
+  border-color: #555;
+}
+body.dark code, body.dark pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+}
+
+/* Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.theme-toggle:hover {
+  background: #388e3c;
+}
+
+/* Copy Button inside Code Blocks */
+pre {
+  position: relative;
+}
+pre button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+}
+pre button:hover {
+  background: #388e3c;
+}
+
 
   </style>
   <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
